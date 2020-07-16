@@ -1,0 +1,39 @@
+﻿@page "/todo"
+
+@inject IToDoViewModel ViewModel
+@using System.ComponentModel;
+@implements IDisposable
+
+<h1>Items to do: @ViewModel.ToDoItems</h1>
+
+<CascadingValue Value=@ViewModel Name="ViewModel">
+    <ToDoListComponent />
+    <ToDoFormComponent />
+</CascadingValue>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        ViewModel.PropertyChanged += async (sender, e) => {
+            await InvokeAsync(() =>
+            {
+                StateHasChanged();
+            });
+        };
+        await base.OnInitializedAsync();
+    }
+
+    async void OnPropertyChangedHandler(object sender, PropertyChangedEventArgs e)
+    {
+        await InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        ViewModel.PropertyChanged -= OnPropertyChangedHandler;
+    }
+}

@@ -1,0 +1,30 @@
+﻿@if (ViewModel?.ToDoItemList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="card-deck" >
+        @foreach (var todoitem in ViewModel.ToDoItemList.OrderBy(i => i.Date).ThenBy(i=>i.Done))
+        {
+            <div class="card mb-3 @(todoitem.Done ? "bg-light" : "text-white bg-dark" )" style="min-width: 18rem; max-width: 18rem;">
+                <div class="card-header">@(todoitem.Date?.ToShortDateString() ?? string.Empty)</div>
+                <div class="card-body">
+                    <h5 class="card-title">@todoitem.Title</h5>
+                    <p class="card-text">@todoitem.Notes</p>
+                    <button disabled="@ViewModel.IsBusy" class="btn @(todoitem.Done ? "btn-secondary" : "btn-primary")" @onclick="@(() => SetToDoItem(todoitem))">Edit</button>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    [CascadingParameter(Name = "ViewModel")]
+    IToDoViewModel ViewModel { get; set; }
+
+    void SetToDoItem(ToDoItem todoitem)
+    {
+        ViewModel.ToDoItem = todoitem;
+    }
+}
