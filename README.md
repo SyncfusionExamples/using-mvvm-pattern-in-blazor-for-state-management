@@ -76,7 +76,7 @@ dotnet run
 
 - For general product questions, visit the [Syncfusion Community Forum](https://www.syncfusion.com/forums) or [Syncfusion Support](https://www.syncfusion.com/support).
 - To report an issue specific to this sample, open a GitHub issue in this repository.
-- [Getting Started with .NET MAUI Blazor App](https://blazor.syncfusion.com/documentation/getting-started/maui-blazor-app)
+- Refer to the MVVM state-management guidance for Blazor applications: https://www.syncfusion.com/blogs/post/mvvm-pattern-blazor-state-management
 
 ## License
 
